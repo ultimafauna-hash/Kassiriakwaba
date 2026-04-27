@@ -81,7 +81,16 @@ export const HomeView = ({
     >
       {/* Rubric Navigation */}
       <div className="space-y-6">
-        <div className="flex flex-nowrap lg:flex-wrap gap-2 overflow-x-auto pb-4 lg:pb-0 no-scrollbar -mx-4 px-4 lg:mx-0 lg:px-0 touch-pan-x scroll-smooth border-b border-slate-100 lg:border-none">
+        <div 
+          onWheel={(e) => {
+            const container = e.currentTarget;
+            container.scrollTo({
+              left: container.scrollLeft + e.deltaY,
+              behavior: 'auto'
+            });
+          }}
+          className="flex flex-nowrap lg:flex-wrap gap-2 overflow-x-auto pb-4 lg:pb-0 no-scrollbar -mx-4 px-4 lg:mx-0 lg:px-0 touch-pan-x scroll-smooth border-b border-slate-100 lg:border-none"
+        >
           {RUBRICS.map(rubric => (
             <motion.button
               key={rubric.id}
@@ -106,6 +115,13 @@ export const HomeView = ({
         <AnimatePresence>
           {RUBRICS.find(r => r.label === activeCategory)?.sub && (
             <motion.div 
+              onWheel={(e) => {
+                const container = e.currentTarget;
+                container.scrollTo({
+                  left: container.scrollLeft + e.deltaY,
+                  behavior: 'auto'
+                });
+              }}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}

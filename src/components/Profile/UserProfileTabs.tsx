@@ -818,7 +818,17 @@ export const UserProfileTabs = ({
                <h4 className="font-black text-sm uppercase tracking-widest">Mes Médailles</h4>
                <span className="text-[10px] font-black text-primary uppercase">Voir tout</span>
             </div>
-            <div className="flex gap-4 overflow-x-auto pb-4">
+            <div 
+               onWheel={(e) => {
+                 const container = e.currentTarget;
+                 const scrollAmount = e.deltaY;
+                 container.scrollTo({
+                   left: container.scrollLeft + scrollAmount,
+                   behavior: 'auto'
+                 });
+               }}
+               className="flex gap-4 overflow-x-auto pb-4"
+            >
                {[
                  { id: 1, label: 'Pionnier', color: 'bg-amber-400', icon: '💎' },
                  { id: 2, label: 'Lecteur', color: 'bg-emerald-400', icon: '📚' },

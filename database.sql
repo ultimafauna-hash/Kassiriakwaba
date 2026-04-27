@@ -321,9 +321,15 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `whatsappnumber` VARCHAR(50),
   `sociallinks` TEXT, -- JSON object
   `paymentlinks` TEXT, -- JSON object
+  `config` LONGTEXT, -- Centralized JSON field for dynamic settings (categories, countries, icons, colors, etc.)
   `maintenance_mode` TINYINT(1) DEFAULT 0,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Initial data for settings
+INSERT INTO `settings` (`id`, `sitename`, `description`, `adminemail`, `config`) 
+VALUES (1, 'Akwaba Info', 'Votre portail d\'actualité africaine et mondiale.', 'admin@akwabainfo.com', '{"categories":["Politique","Société","Sport","Économie","Culture","Histoire","Santé","Science","Tech","Éducation","Environnement"],"countries":["Bénin","Burkina Faso","Cameroun","Centrafrique","Congo-Brazzaville","Côte d’Ivoire","Gabon","Guinée","Mali","Mauritanie","Niger","RD Congo","Sénégal","Tchad","Togo","Autre Afrique","Diaspora"],"categories_icons":{"Politique":"🏛️","Société":"🤝","Sport":"⚽","Économie":"📈","Culture":"🎨","Histoire":"📜","Santé":"🏥","Science":"🔬","Tech":"💻","Éducation":"🎓","Environnement":"🌿"},"countries_flags":{"Côte d’Ivoire":"🇨🇮","Sénégal":"🇸🇳","Mali":"🇲🇱","Burkina Faso":"🇧🇫","Guinée":"🇬🇳","Bénin":"🇧🇯","Niger":"🇳🇪","Togo":"🇹🇬","Cameroun":"🇨🇲","Gabon":"🇬🇦","Congo-Brazzaville":"🇨🇬","RD Congo":"🇨🇩","Tchad":"🇹🇩","Centrafrique":"🇨🇫","Mauritanie":"🇲🇷"}}')
+ON DUPLICATE KEY UPDATE `sitename`=`sitename`;
 
 -- Table: transactions
 CREATE TABLE IF NOT EXISTS `transactions` (

@@ -2111,7 +2111,16 @@ export const AdminDashboard = ({
                 </div>
               </div>
 
-              <div className="bg-white rounded-3xl border border-slate-100 shadow-xl overflow-x-auto custom-scrollbar">
+              <div 
+                onWheel={(e) => {
+                  const container = e.currentTarget;
+                  container.scrollTo({
+                    left: container.scrollLeft + e.deltaY,
+                    behavior: 'auto'
+                  });
+                }}
+                className="bg-white rounded-3xl border border-slate-100 shadow-xl overflow-x-auto custom-scrollbar"
+              >
                 <div className="min-w-[800px]">
                   <div className="grid grid-cols-12 px-6 py-4 bg-slate-50/50 border-b border-slate-100 text-[10px] font-black uppercase tracking-widest text-slate-400">
                     <div className="col-span-4">Utilisateur</div>
@@ -3180,7 +3189,16 @@ const TransactionsList = ({ onValidate }: { onValidate?: (tid: string, uid: stri
         <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{transactions.length} transactions</span>
       </div>
       
-      <div className="bg-white rounded-3xl border border-slate-100 shadow-xl overflow-x-auto custom-scrollbar">
+      <div 
+        onWheel={(e) => {
+          const container = e.currentTarget;
+          container.scrollTo({
+            left: container.scrollLeft + e.deltaY,
+            behavior: 'auto'
+          });
+        }}
+        className="bg-white rounded-3xl border border-slate-100 shadow-xl overflow-x-auto custom-scrollbar"
+      >
         <div className="min-w-[900px]">
           <div className="grid grid-cols-12 px-6 py-4 bg-slate-50/50 border-b border-slate-100 text-[10px] font-black uppercase tracking-widest text-slate-400">
           <div className="col-span-3">Utilisateur / Email</div>
